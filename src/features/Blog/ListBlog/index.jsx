@@ -409,6 +409,8 @@ function ListBlog(props) {
           margin: "10px 0px",
           backgroundColor: "#40a9ff",
           color: "white",
+          float: "right"
+
         }}
       >
         {t("blog.add")}
@@ -584,6 +586,7 @@ function ListBlog(props) {
         onChange={handleTableChange}
         loading={loading}
         scroll={{ x: 1500 }}
+        bordered={true}
       />
     </div>
   );

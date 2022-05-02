@@ -45,20 +45,20 @@ function Logout(props) {
       </Menu.Item>
     </Menu>
   );
-  const lang = (
-    <Menu style={{ marginTop : '10px'}}>
-      <Menu.Item>
-        <Button type="link" onClick={() => TranslateClick("en")}>
-          English
-        </Button>
-      </Menu.Item>
-      <Menu.Item>
-        <Button type="link" onClick={() => TranslateClick("vi")}>
-          Việt nam
-        </Button>
-      </Menu.Item>
-    </Menu>
-  );
+  // const lang = (
+  //   <Menu style={{ marginTop : '10px'}}>
+  //     <Menu.Item>
+  //       <Button type="link" onClick={() => TranslateClick("en")}>
+  //         English
+  //       </Button>
+  //     </Menu.Item>
+  //     <Menu.Item>
+  //       <Button type="link" onClick={() => TranslateClick("vi")}>
+  //         Việt nam
+  //       </Button>
+  //     </Menu.Item>
+  //   </Menu>
+  // );
   return (
     <Space size={20} style={{ position: "absolute", top: "20px", right: "100px" }}>
       <Dropdown overlay={menu} placement="bottomCenter" arrow>
@@ -71,9 +71,9 @@ function Logout(props) {
           }
         />
       </Dropdown>
-      <Dropdown overlay={lang} placement="bottomCenter" arrow>
+      {/* <Dropdown overlay={lang} placement="bottomCenter" arrow>
         <GlobalOutlined />
-      </Dropdown>
+      </Dropdown> */}
     </Space>
   );
 }

@@ -368,6 +368,7 @@ function ListCustomer(props) {
           margin: "10px 0px",
           backgroundColor: "#40a9ff",
           color: "white",
+          float: "right"
         }}
       >
         {t("customer.add")}
@@ -500,6 +501,7 @@ function ListCustomer(props) {
         onChange={handleTableChange}
         loading={loading}
         scroll={{ x: 1400 }}
+        bordered={true}
       />
     </div>
   );

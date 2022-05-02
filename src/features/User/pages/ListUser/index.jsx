@@ -428,6 +428,7 @@ function ListUser(props) {
           margin: "10px 0px",
           backgroundColor: "#40a9ff",
           color: "white",
+          float: "right"
         }}
       >
         {t("user.add")}
@@ -612,6 +613,7 @@ function ListUser(props) {
         onChange={handleTableChange}
         scroll={{ x: 1500 }}
         loading={loading}
+        bordered={true}
       />
     </div>
   );

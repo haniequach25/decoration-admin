@@ -680,7 +680,7 @@ function ListOrder(props) {
       <Button
         onClick={handleOpen}
         type="primary"
-        style={{ margin: "10px 0px" }}
+        style={{ margin: "10px 0px", float: "right" }}
       >
         {t("order.add")}
       </Button>
@@ -991,6 +991,7 @@ function ListOrder(props) {
         pagination={{ ...pagination, total: total }}
         loading={loading}
         rowKey="_id"
+        bordered={true}
       />
     </div>
   );

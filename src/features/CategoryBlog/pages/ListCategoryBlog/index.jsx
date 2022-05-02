@@ -1,20 +1,26 @@
 import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import { Table, Popconfirm, Button, Drawer, Space, Form, Input, message } from "antd";
-import { useDispatch, useSelector } from "react-redux";
 import {
-  getAllCat,
-  saveCat,
-} from "features/CategoryBlog/categoryBlog";
+  Table,
+  Popconfirm,
+  Button,
+  Drawer,
+  Space,
+  Form,
+  Input,
+  message,
+} from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllCat, saveCat } from "features/CategoryBlog/categoryBlog";
 import { QuestionCircleOutlined, SearchOutlined } from "@ant-design/icons";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 import AddEdit from "../AddEdit";
-import { saveCatBlog ,removeCatBlog } from "api/categoryBlog";
+import { saveCatBlog, removeCatBlog } from "api/categoryBlog";
 ListCategoryBlog.propTypes = {};
 
 function ListCategoryBlog(props) {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const data = useSelector((state) => state.categoryBlogs.categoryBlogs);
   const total = useSelector((state) => state.categoryBlogs.totalCount);
   const dispatch = useDispatch();
@@ -89,12 +95,12 @@ function ListCategoryBlog(props) {
       },
     },
     {
-      title: t&&t ("categoryBlog.category"),
+      title: t && t("categoryBlog.category"),
       dataIndex: "TenDanhMucBlog",
       sorter: (a, b) => a.TenDanhMucBlog - b.TenDanhMucBlog,
     },
     {
-      title: t&&t ("button.action"),
+      title: t && t("button.action"),
       dataIndex: "",
       key: "x",
       render: (record) => (
@@ -105,12 +111,12 @@ function ListCategoryBlog(props) {
             icon={<QuestionCircleOutlined style={{ color: "red" }} />}
           >
             <Button type="link" danger>
-            {t("button.delete")}
+              {t("button.delete")}
             </Button>
           </Popconfirm>
 
           <Button type="link" onClick={() => handleOpen(record)}>
-          {t("button.edit")}
+            {t("button.edit")}
           </Button>
         </div>
       ),
@@ -132,12 +138,12 @@ function ListCategoryBlog(props) {
   };
 
   const handleConfirmDelete = async (id) => {
-   
-      const action = await removeCatBlog(id).then(res => message.success("Delete category success",0.4)).catch(err =>{
-        message.error(err.response.data.message,0.2)
+    const action = await removeCatBlog(id)
+      .then((res) => message.success("Delete category success", 0.4))
+      .catch((err) => {
+        message.error(err.response.data.message, 0.2);
       });
-      handleReloadData();
- 
+    handleReloadData();
   };
   const handleReloadData = () => {
     const action = getAllCat();
@@ -195,8 +201,10 @@ function ListCategoryBlog(props) {
 
   const finishForm = async (data) => {
     setSubmit(true);
-      const action = await saveCatBlog({ ...data, _id: valueForm._id }).then(res => message.success("Success",0.5)).catch(err => message.success(err.response.data.message,1));
-      setSubmit(false);
+    const action = await saveCatBlog({ ...data, _id: valueForm._id })
+      .then((res) => message.success("Success", 0.5))
+      .catch((err) => message.success(err.response.data.message, 1));
+    setSubmit(false);
     form.current.resetFields();
     setValueForm({
       TenDanhMucBlog: "",
@@ -204,7 +212,6 @@ function ListCategoryBlog(props) {
     });
     handleReloadData();
     setVisible(false);
-   
   };
 
   useEffect(() => {
@@ -220,8 +227,16 @@ function ListCategoryBlog(props) {
 
   return (
     <div>
-      <Button onClick={handleOpen} style={{ margin: "10px 0px", backgroundColor: "#40a9ff", color: "white" }}>
-      {t("categoryBlog.add")}
+      <Button
+        onClick={handleOpen}
+        style={{
+          margin: "10px 0px",
+          backgroundColor: "#40a9ff",
+          color: "white",
+          float: "right",
+        }}
+      >
+        {t("categoryBlog.add")}
       </Button>
       <Drawer
         visible={visible}
@@ -232,8 +247,13 @@ function ListCategoryBlog(props) {
         footer={
           <Space style={{ float: "right" }}>
             <Button onClick={handleClose}>{t("button.cancel")}</Button>
-            <Button type="primary" form="formCategoryBlog" htmlType="submit" disabled={submit}>
-            {t("button.submit")}
+            <Button
+              type="primary"
+              form="formCategoryBlog"
+              htmlType="submit"
+              disabled={submit}
+            >
+              {t("button.submit")}
             </Button>
           </Space>
         }
@@ -248,7 +268,12 @@ function ListCategoryBlog(props) {
           <Form.Item
             label={t && t("categoryBlog.category")}
             name="TenDanhMucBlog"
-            rules={[{ required: true, message: (t("categoryBlog.Pleaseinputyourcategoryblog")) }]}
+            rules={[
+              {
+                required: true,
+                message: t("categoryBlog.Pleaseinputyourcategoryblog"),
+              },
+            ]}
           >
             <Input />
           </Form.Item>
@@ -258,10 +283,11 @@ function ListCategoryBlog(props) {
         columns={column}
         dataSource={[...data]}
         rowKey={(record) => record.MaDanhMucBlog}
-        pagination={{...pagination,total: total}}
+        pagination={{ ...pagination, total: total }}
         onChange={handleTableChange}
         scroll={{ x: 1500 }}
         loading={loading}
+        bordered={true}
       />
     </div>
   );

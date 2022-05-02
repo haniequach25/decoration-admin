@@ -20,7 +20,7 @@ function App() {
   };
   const dispatch = useDispatch();
   useMetaTags({
-    title: "LMG Admin"
+    title: "ADMIN"
   })
 
   const user = useSelector((state) => state.me.user);

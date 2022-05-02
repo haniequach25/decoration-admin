@@ -299,14 +299,12 @@ function ListProduct(props) {
     });
   };
   const handleConfirmDelete = async (id) => {
-   
-      const action = await removeProduct(id)
-        .then((res) => message.success("Delete product success", 0.4))
-        .catch((err) => {
-          message.error(err.response.data.message, 1);
-        });
-      handleReloadData();
-  
+    const action = await removeProduct(id)
+      .then((res) => message.success("Delete product success", 0.4))
+      .catch((err) => {
+        message.error(err.response.data.message, 1);
+      });
+    handleReloadData();
   };
 
   const handleDeleteImage = (id) => {
@@ -324,7 +322,7 @@ function ListProduct(props) {
     sort += sorter.field ? sorter.field : "code";
     let action;
     if (sort != "") {
-      if (filters && filters.code &&  filters.code.length) {
+      if (filters && filters.code && filters.code.length) {
         action = getAll({
           pageNo: pagination.current,
           pageSize: pagination.pageSize,
@@ -363,25 +361,24 @@ function ListProduct(props) {
   const finishForm = async (data) => {
     setSubmit(true);
 
-      setVisible(false);
-      let arrImg = data.AnhMoTa.map((p, index) => p._id);
-      const action = await saveProduct({
-        ...data,
-        AnhMoTa: arrImg,
-        _id: valueForm._id,
-      })
-        .then((res) => message.success("Success",0.5))
-        .catch((err) => message.success(err.response.data.message, 1));
-        setSubmit(false);
+    setVisible(false);
+    let arrImg = data.AnhMoTa.map((p, index) => p._id);
+    const action = await saveProduct({
+      ...data,
+      AnhMoTa: arrImg,
+      _id: valueForm._id,
+    })
+      .then((res) => message.success("Success", 0.5))
+      .catch((err) => message.success(err.response.data.message, 1));
+    setSubmit(false);
 
-      form.current.resetFields();
-      setValueForm({
-        _id: null,
-        MoTa: "",
-        AnhMoTa: [],
-      });
-      handleReloadData();
-  
+    form.current.resetFields();
+    setValueForm({
+      _id: null,
+      MoTa: "",
+      AnhMoTa: [],
+    });
+    handleReloadData();
   };
 
   const handleChangeEditor = async (content) => {
@@ -442,7 +439,7 @@ function ListProduct(props) {
       <Button
         onClick={handleOpen}
         type="primary"
-        style={{ margin: "10px 0px" }}
+        style={{ margin: "10px 0px", float: "right" }}
       >
         {t("product.add")}
       </Button>
@@ -455,7 +452,12 @@ function ListProduct(props) {
         footer={
           <Space style={{ float: "right" }}>
             <Button onClick={handleClose}>{t("button.cancel")}</Button>
-            <Button type="primary" form="formProduct" htmlType="submit" disabled={submit}>
+            <Button
+              type="primary"
+              form="formProduct"
+              htmlType="submit"
+              disabled={submit}
+            >
               {t("button.submit")}
             </Button>
           </Space>
@@ -621,6 +623,7 @@ function ListProduct(props) {
         onChange={handleTableChange}
         loading={loading}
         rowKey="code"
+        bordered={true}
       />
     </div>
   );

@@ -162,7 +162,7 @@ function ListCategoryProduct(props) {
     sort += sorter.field ? sorter.field : "_id";
     let action;
     if (sort != "") {
-      if (filters && filters._id &&  filters._id.length) {
+      if (filters && filters._id && filters._id.length) {
         action = getAllCategory({
           pageNo: pagination.current,
           pageSize: pagination.pageSize,
@@ -204,7 +204,6 @@ function ListCategoryProduct(props) {
     const action = await saveCatProduct({ ...data, _id: valueForm._id })
       .then((res) => message.success("Success", 0.5))
       .catch((err) => message.error(err.response.data.message, 1));
-      
 
     form.current.resetFields();
     setValueForm({
@@ -229,7 +228,11 @@ function ListCategoryProduct(props) {
 
   return (
     <div>
-      <Button onClick={handleOpen} style={{ margin: "10px 0px" }} type="primary">
+      <Button
+        onClick={handleOpen}
+        style={{ margin: "10px 0px", float: "right" }}
+        type="primary"
+      >
         {t("categoryProduct.add")}
       </Button>
       <Drawer
@@ -241,7 +244,12 @@ function ListCategoryProduct(props) {
         footer={
           <Space style={{ float: "right" }}>
             <Button onClick={handleClose}>{t("button.cancel")}</Button>
-            <Button type="primary" form="formCategory" htmlType="submit" disabled={submit}>
+            <Button
+              type="primary"
+              form="formCategory"
+              htmlType="submit"
+              disabled={submit}
+            >
               {t("button.submit")}
             </Button>
           </Space>
@@ -276,6 +284,7 @@ function ListCategoryProduct(props) {
         onChange={handleTableChange}
         loading={loading}
         scroll={{ x: 1500, y: 300 }}
+        bordered={true}
       />
     </div>
   );
