@@ -14,12 +14,22 @@ import TodayOrder from "./components/TodayOrder";
 import { getAllCus } from "features/KhachHang/customerSlice";
 import { useTranslation } from "react-i18next";
 import { Chart } from "react-charts";
+import { getAllCatProduct } from "api/categoryProduct";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+import { getAllProduct } from "api/productApi";
 
 Home.propTypes = {};
 
 function Home(props) {
- 
-
   const axes = React.useMemo(
     () => [
       { primary: true, type: "linear", position: "bottom" },
@@ -34,9 +44,35 @@ function Home(props) {
   const { RangePicker } = DatePicker;
   const [data, setData] = useState([]);
 
+  const [categories, setCategories] = useState([]);
+
   useEffect(() => {
     const action = getAllCus();
     dispatch(action);
+    async function fetchCate() {
+      const cate = await getAllCatProduct();
+      setCategories(cate.result.data);
+      console.log("cate", cate);
+      const products = await getAllProduct();
+      var tempCate = [];
+      for (var i = 0; i < cate.result.data.length; i++) {
+        var SoLuongDaBan = 0;
+        for (var j = 0; j < products.result.data.length; j++) {
+          if (
+            cate.result.data[i].TenDanhMucSP ===
+            products.result.data[j].DanhMucSP.TenDanhMucSP
+          ) {
+            SoLuongDaBan += products.result.data[j].SoLuongDaBan;
+          }
+        }
+        console.log(cate.result.data[i].TenDanhMucSP, SoLuongDaBan);
+        tempCate.push({
+          TenDanhMucSP: cate.result.data[i].TenDanhMucSP,
+          SoLuongDaBan: SoLuongDaBan,
+        });
+      }
+      setCategories(tempCate);
+    }
     async function fetchApi() {
       const data = await getFilterOrder();
       setOrders(orders);
@@ -47,11 +83,12 @@ function Home(props) {
             moment(p.createdAt).format("DD/MM/YYYY") ==
             moment(moment().subtract(i.toString(), "days")).format("DD/MM/YYYY")
         );
-        dataFake.push(a)
+        dataFake.push(a);
       }
-      setData(dataFake)
+      setData(dataFake);
     }
-    fetchApi()
+    fetchCate();
+    fetchApi();
   }, []);
   return (
     <div>
@@ -73,22 +110,36 @@ function Home(props) {
           />
         </Col>
       </Row>
-      <div style={{ width: '100%' , height: '400px'}}>
-        <Chart data={[
-      {
-        label: "Series 1",
-        data: [
-          [0, (data[0]?.length || 0)],
-          [1, (data[1]?.length || 0)],
-          [2, (data[2]?.length || 0)],
-          [3, (data[3]?.length || 0)],
-          [4, (data[4]?.length || 0)],
-          [5, (data[5]?.length || 0)],
-          [6, (data[6]?.length || 0)],
-
-        ],
-      },
-    ]} axes={axes} />
+      <div style={{ width: "100%", height: "400px" }}>
+        <Chart
+          data={[
+            {
+              label: "Series 1",
+              data: [
+                [0, data[0]?.length || 0],
+                [1, data[1]?.length || 0],
+                [2, data[2]?.length || 0],
+                [3, data[3]?.length || 0],
+                [4, data[4]?.length || 0],
+                [5, data[5]?.length || 0],
+                [6, data[6]?.length || 0],
+              ],
+            },
+          ]}
+          axes={axes}
+        />
+      </div>
+      <div style={{ width: "100%", height: "400px" }}>
+        <ResponsiveContainer width="100%" height={400}>
+          <BarChart barSize={100} width={730} height={400} data={categories}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="TenDanhMucSP" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="SoLuongDaBan" fill="#8884d8" />
+          </BarChart>
+        </ResponsiveContainer>
       </div>
     </div>
   );
