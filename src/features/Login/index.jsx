@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Form, Input, Button, Row, Col, Typography, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import logo from "../../assets/images/KFC-Emblem.png";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSucces, loginThunk } from "./loginSlice";
 import { useHistory } from "react-router-dom";
@@ -21,15 +20,15 @@ function LoginForm(props) {
   const onFinish = async (values) => {
     setSubmit(true);
     const action = await login(values)
-    .then((res) => {
-      message.success("Login success", 1);
-      const action = loginSucces(res)
-      dispatch(action)
-      history.push("/");
-    })
-    .catch((err) => {
-      message.error("Email or password not correct", 0.6);
-    });
+      .then((res) => {
+        message.success("Login success", 1);
+        const action = loginSucces(res);
+        dispatch(action);
+        history.push("/");
+      })
+      .catch((err) => {
+        message.error("Email or password not correct", 0.6);
+      });
     setSubmit(false);
   };
   return (
@@ -50,11 +49,16 @@ function LoginForm(props) {
               alignContent: "center",
             }}
           >
-            <Title level={2} style={{ textAlign: "center" }}>
-              ADMINISTRATOR
+            <Title
+              level={2}
+              style={{ textAlign: "center", fontWeight: "lighter" }}
+            >
+              Decoration management
             </Title>
             <img
-              src={logo}
+              src={
+                "https://scontent.fhan6-1.fna.fbcdn.net/v/t39.30808-6/271225614_118205227388095_543399018231103376_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=YNoxjz72tmEAX-Dq8_U&_nc_ht=scontent.fhan6-1.fna&oh=00_AT9bJOuCW43O7GnqQtjiHYlP1N4If8tImVVivCjm9B1RCw&oe=62778780"
+              }
               alt=""
               style={{ width: "100%", objectFit: "cover" }}
             />

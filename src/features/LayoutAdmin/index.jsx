@@ -81,21 +81,18 @@ function LayoutAdmin(props) {
       setSelectedKeys("8");
     } else if (location.pathname == "/users") {
       setSelectedKeys("9");
-    }
-    else if (location.pathname == "/me") {
+    } else if (location.pathname == "/me") {
       setSelectedKeys("10");
     } else {
       setSelectedKeys("1");
     }
   }, []);
 
-
   return (
     <Layout style={{ minHeight: "100vh", position: "relative" }}>
       <Logout />
       <Sider collapsible collapsed={collapsed} onCollapse={() => onCollapse()}>
         <div style={{ textAlign: "center", margin: "10px 0px" }}>
-
           {!collapsed && (
             <Title level={3} style={{ color: "white", padding: "10px 0px" }}>
               {t("menu.welcome")} {user?.TenNhanVien?.split(" ")[0]}
@@ -172,7 +169,7 @@ function LayoutAdmin(props) {
               </Button>
             </Menu.Item>
             <Menu.Item key="12">
-            <Button type="link" onClick={() => TranslateClick("vi")}>
+              <Button type="link" onClick={() => TranslateClick("vi")}>
                 Việt nam
               </Button>
             </Menu.Item>
@@ -216,9 +213,7 @@ function LayoutAdmin(props) {
             </Switch>
           </div>
         </Content>
-        <Footer style={{ textAlign: "center" }}>
-          Fast Food Management 2021
-        </Footer>
+        <Footer style={{ textAlign: "center" }}>Decoration Shop 2022</Footer>
       </Layout>
     </Layout>
   );
