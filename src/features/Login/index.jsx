@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginSucces, loginThunk } from "./loginSlice";
 import { useHistory } from "react-router-dom";
 import { login } from "api/userApi";
+import Logo from "../../assets/images/logo.jpg";
 
 LoginForm.propTypes = {};
 
@@ -56,9 +57,7 @@ function LoginForm(props) {
               Decoration management
             </Title>
             <img
-              src={
-                "https://scontent.fhan6-1.fna.fbcdn.net/v/t39.30808-6/271225614_118205227388095_543399018231103376_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=YNoxjz72tmEAX-Dq8_U&_nc_ht=scontent.fhan6-1.fna&oh=00_AT9bJOuCW43O7GnqQtjiHYlP1N4If8tImVVivCjm9B1RCw&oe=62778780"
-              }
+              src={Logo}
               alt=""
               style={{ width: "100%", objectFit: "cover" }}
             />

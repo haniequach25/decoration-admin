@@ -192,7 +192,11 @@
         "Custom": "Tùy chọn",
         "StartDate": "Ngày bắt đầu",
         "EndDate": "Ngày kết thúc",
-        "AnalystTotal": "Thống kê doanh thu"
+        "AnalystTotal": "Thống kê doanh thu",
+        "ProductCategories": "Danh mục sản phẩm",
+        "TotalOrders": "Tổng đơn hàng",
+        "TotalCustomers": "Tổng khách hàng",
+        "RemainingProducts": "Số lượng hàng còn lại"
     }
     
 }
